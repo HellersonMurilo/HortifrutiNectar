@@ -1,26 +1,18 @@
-const mysql = require('mysql');
+const { Sequelize } = require('sequelize');
 
-// Crie a conexão com o banco de dados usando as variáveis de ambiente
-const connection = mysql.createConnection({
+// Configuração das credenciais de acesso ao banco de dados
+const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    dialect: 'mysql' // Ou o tipo de banco de dados que você está usando (por exemplo, 'postgres', 'sqlite', etc.)
 });
 
+// Teste de conexão
+sequelize.authenticate()
+    .then(() => {
+        console.log('Conexão com o banco de dados estabelecida com sucesso.');
+    })
+    .catch((error) => {
+        console.error('Erro ao conectar-se ao banco de dados:', error);
+    });
 
-// Tente conectar ao banco de dados
-connection.connect((err) => {
-    if (err) {
-        console.error("Erro na conexão com o banco de dados:", err);
-        return;
-    }
-    console.log("Conexão bem-sucedida com o banco de dados!");
-});
-
-// Lidar com erros de conexão
-connection.on('error', (err) => {
-    console.error("Erro na conexão com o banco de dados:", err);
-});
-
-module.exports = connection;
+module.exports = sequelize;
