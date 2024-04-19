@@ -38,39 +38,51 @@ class UsuariosController {
     async atualizar(req, res) {
         try {
             const { id } = req.params;
-            const { name, age, password } = req.body;
+            const { name, email, password } = req.body;
 
             if (!id) {
-                return res.status(400).json({
-                    erro: "Id não informado"
-                });
+                return res.status(400).json({ erro: "Id não informado" });
             }
 
-            if (!name || !age || !password) {
-                return res.status(400).json({
-                    error: 'Dados preenchidos incorretamente!'
-                });
+            if (!name || !email || !password) {
+                return res.status(400).json({ error: 'Dados preenchidos incorretamente!' });
             }
 
-            // Lógica de atualização no banco de dados
-            // ...
+            const dadosAtualizados = {}
+            if (name) dadosAtualizados.name = name
+            if (email) dadosAtualizados.email = email;
+            if (password) dadosAtualizados.password = password;
+
+            // Atualizar o usuário no banco de dados
+            const [numLinhasAfetadas, usuariosAtualizados] = await usuarioModel.update(dadosAtualizados, {
+                where: { id: id },
+                returning: true, // Retorna os registros atualizados
+            });
+
+            console.log(numLinhasAfetadas)
+
+            // Verificar se o usuário foi encontrado e atualizado
+            //VERIFICAR
+            if (numLinhasAfetadas === 0) {
+                return res.status(404).json({ mensagem: "Nenhum usuário encontrado com o ID fornecido." });
+            }
 
             // Supondo que a atualização ocorreu com sucesso
             res.status(200).json({
-                msg: "Dados atualizados com sucesso!"
+                mensagem: "Usuário atualizado com sucesso.",
+                usuario: usuariosAtualizados[0]
             });
         } catch (error) {
             res.status(500).json({ erro: error.message });
         }
     }
 
+
     async deletar(req, res) {
         try {
 
             // Pegando o id do parâmetro da requisição
             const { id } = req.params;
-
-            console.log(id)
 
             // Verificando se o id foi informado
             if (!id) {
