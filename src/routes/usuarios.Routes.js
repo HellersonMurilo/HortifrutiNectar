@@ -10,5 +10,7 @@ usuarioRoutes.post('/criar', usuarioController.criar)
 
 usuarioRoutes.put('/atualizar/:id', usuarioController.atualizar)
 
+usuarioRoutes.delete('/deletar/:id', usuarioController.deletar)
+
 //exportando
 module.exports = usuarioRoutes;

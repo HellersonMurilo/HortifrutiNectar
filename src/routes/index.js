@@ -9,3 +9,4 @@ const routes = Router()
 routes.use('/usuarios', usuarioRoutes)
 
 module.exports = routes
+
