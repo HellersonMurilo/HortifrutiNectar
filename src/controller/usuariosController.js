@@ -59,11 +59,9 @@ class UsuariosController {
                 returning: true, // Retorna os registros atualizados
             });
 
-            console.log(numLinhasAfetadas)
-
             // Verificar se o usuário foi encontrado e atualizado
             //VERIFICAR
-            if (numLinhasAfetadas === 0) {
+            if (numLinhasAfetadas == 0) {
                 return res.status(404).json({ mensagem: "Nenhum usuário encontrado com o ID fornecido." });
             }
 
@@ -76,7 +74,6 @@ class UsuariosController {
             res.status(500).json({ erro: error.message });
         }
     }
-
 
     async deletar(req, res) {
         try {
