@@ -8,7 +8,7 @@ produtosRouter.get('/listar')
 
 produtosRouter.delete('/deletar/:id', produtoController.deletar)
 
-produtosRouter.put('/atualizar/:id')
+produtosRouter.put('/atualizar/:id', produtoController.atualizar)
 
 produtosRouter.post('/criar', produtoController.criar)
 
