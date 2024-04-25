@@ -121,6 +121,26 @@ class ProdutosController {
             })
         }
     }
+
+    async listar(req, res) {
+
+        try {
+            //trazer todos os produtos
+            const produtos = await produtoModel.findAll();
+
+            //Verificar se teve retorno
+            if (!produtos) {
+                return res.status(400).json({
+                    error: 'Produtos não encontrados'
+                })
+            }
+
+            return res.status(200).json(produtos);
+        } catch (error) {
+            res.status(500).json({ erro: error.message });
+        }
+
+    }
 }
 
 module.exports = ProdutosController;

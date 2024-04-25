@@ -4,7 +4,7 @@ const produtosRouter = Router()
 const ProdutosController = require('../controller/produtosController')
 const produtoController = new ProdutosController()
 
-produtosRouter.get('/listar')
+produtosRouter.get('/listar', produtoController.listar)
 
 produtosRouter.delete('/deletar/:id', produtoController.deletar)
 
