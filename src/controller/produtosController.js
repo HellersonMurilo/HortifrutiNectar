@@ -13,6 +13,19 @@ class ProdutosController {
                 });
             }
 
+            const verificaCategoria = await categoriaModel.findOne({
+                where:{
+                    id : categoriaId
+                }
+            })
+
+            //validando se a categoria existe
+            if (!verificaCategoria) {
+                return res.status(400).json({
+                    msg: "A categoria informada não existe"
+                })
+            }
+
             // Cria o produto com os dados fornecidos
             const produto = await produtoModel.create({
                 name,
@@ -25,7 +38,7 @@ class ProdutosController {
             // Retorna o produto criado com sucesso
             return res.status(201).json(produto);
         } catch (error) {
-            return res.status(400).json({
+            return res.status(500).json({
                 error: 'Erro ao criar produto',
                 err: error
             });
