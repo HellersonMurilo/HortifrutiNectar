@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/conexao');
+const Categorias = require('./categoriasModel');
 
 const Produtos = sequelize.define('produtos', {
     id: {
@@ -18,11 +19,6 @@ const Produtos = sequelize.define('produtos', {
     },
     price:{
         type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    category:
-    {
-        type: DataTypes.STRING,
         allowNull: false
     },
     description: {

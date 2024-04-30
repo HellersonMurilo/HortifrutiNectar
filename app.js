@@ -9,12 +9,15 @@ const PORT = 8080
 //importando a routes
 const routes = require('./src/routes/index.js')
 const sequelize = require('./src/database/conexao.js');
+const Produtos = require('./src/models/produtoModel.js');
+const Categorias = require('./src/models/categoriasModel.js');
 
 // Middleware para parsear o corpo da requisição como JSON
 app.use(bodyParser.json());
 
 app.use(routes)
 
+// validação da conexão com o banco de dados
 try {
     sequelize.authenticate()
         .then(() => {
@@ -26,7 +29,13 @@ try {
 } catch (err) {
     console.error(`Erro de conexão com o banco de dados na main`, err)
 }
-sequelize.sync()
+
+//criação das relações do banco de dados
+Categorias.hasMany(Produtos)
+
+sequelize.sync({
+
+})
 
 app.listen(PORT, () => {
     console.log(`Para acessar, clique aqui: http://localhost:${PORT}`)
