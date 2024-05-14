@@ -21,6 +21,11 @@ const Produtos = sequelize.define('produtos', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    favorite:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: false
