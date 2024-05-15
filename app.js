@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 require('dotenv').config();
-const PORT = 8080
+const PORT = 8080 || process.env.PORT;
 
 
 //importando a routes
