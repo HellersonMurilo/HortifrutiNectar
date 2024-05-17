@@ -4,7 +4,7 @@ const categoriaModel = require('../models/categoriasModel'); // Importe o modelo
 class ProdutosController {
     async criar(req, res, next) {
         try {
-            const { name, amount, price, categoriaId, favorite, description } = req.body;
+            const { name, amount, price, categoriaId, description } = req.body;
 
             // Verificação se o usuário preencheu corretamente
             if (!name || !amount || !price || !categoriaId || !description) {
@@ -32,7 +32,6 @@ class ProdutosController {
                 amount,
                 price,
                 categoriaId,
-                favorite,
                 description
             });
 
@@ -90,9 +89,9 @@ class ProdutosController {
                 });
             }
 
-            const { name, amount, price, categoriaId, favorite, description } = req.body;
+            const { name, amount, price, categoriaId, description } = req.body;
 
-            if (!name || !amount || !price || !categoriaId || !favorite || !description) {
+            if (!name || !amount || !price || !categoriaId || !description) {
                 return res.status(400).json({
                     error: 'Dados preenchidos incorretamente!'
                 });
@@ -102,7 +101,6 @@ class ProdutosController {
                 name: name,
                 amount: amount,
                 price: price,
-                favorite: favorite,
                 description: description
             });
 
@@ -162,27 +160,7 @@ class ProdutosController {
         }
     }
 
-    async listarFavoritos(req, res, next) {
-        try {
-            const produtosFiltrados = await produtoModel.findAll({
-                where: {
-                    favorite: true
-                }
-            })
-
-            if (!produtosFiltrados) {
-                return res.status(200).json({
-                    msg: 'Lista de favoritos vazia'
-                })
-            }
-            res.status(200).json(produtosFiltrados)
-        } catch (error) {
-            res.status(500).json({
-                err: "Ocorreu um erro critico",
-                error: error
-            })
-        }
-    }
+    
 }
 
 module.exports = ProdutosController;

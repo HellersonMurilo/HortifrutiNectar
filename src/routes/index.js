@@ -4,6 +4,7 @@ const { Router } = require("express")
 const usuarioRoutes = require('../routes/usuarios.routes');
 const produtoRoutes = require('../routes/produtos.Routes')
 const categoriasRoutes = require('../routes/categorias.Routes')
+const favoritosRoutes = require('../routes/favoritos.Routes')
 
 const routes = Router()
 
@@ -14,5 +15,6 @@ routes.use('/produtos', produtoRoutes)
 
 routes.use('/categorias', categoriasRoutes)
 
+routes.use('/favoritos', favoritosRoutes)
 module.exports = routes
 

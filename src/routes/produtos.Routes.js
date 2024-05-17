@@ -13,7 +13,4 @@ produtosRouter.put('/atualizar/:id', produtoController.atualizar)
 produtosRouter.post('/criar', produtoController.criar)
 
 
-// Participios 
-produtosRouter.get('/favoritos', produtoController.listarFavoritos)
-
 module.exports = produtosRouter

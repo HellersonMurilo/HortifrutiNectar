@@ -11,6 +11,9 @@ const routes = require('./src/routes/index.js')
 const sequelize = require('./src/database/conexao.js');
 const Produtos = require('./src/models/produtoModel.js');
 const Categorias = require('./src/models/categoriasModel.js');
+const Usuario = require('./src/models/usuarioModel.js');
+const Favoritos = require('./src/models/favoritoModels.js');
+
 
 // Middleware para parsear o corpo da requisição como JSON
 app.use(bodyParser.json());
@@ -32,6 +35,7 @@ try {
 
 //criação das relações do banco de dados
 Categorias.hasMany(Produtos)
+Usuario.hasMany(Favoritos)
 
 sequelize.sync({
 
