@@ -1,11 +1,11 @@
 const { Router } = require('express')
 const favoritosRoutes = Router()
 
-favoritosRoutes.get('/listarFavoritos', (req, res)=>{
+//import do controller
+const FavoritosController = require('../controller/favoritosController')
+const favoritosController = new FavoritosController
 
-})
-favoritosRoutes.post('/adicionarFavorito', (req, res) =>{
-    
-})
+favoritosRoutes.get('/listarFavoritos', favoritosController.listar)
+favoritosRoutes.post('/adicionarFavorito/:id', favoritosController.adicionarFavorito)
 
 module.exports = favoritosRoutes
