@@ -5,6 +5,7 @@ const usuarioRoutes = require('../routes/usuarios.routes');
 const produtoRoutes = require('../routes/produtos.Routes')
 const categoriasRoutes = require('../routes/categorias.Routes')
 const favoritosRoutes = require('../routes/favoritos.Routes')
+const carrinhoRoutes = require('../routes/carrinho.Routes')
 
 const routes = Router()
 
@@ -16,5 +17,8 @@ routes.use('/produtos', produtoRoutes)
 routes.use('/categorias', categoriasRoutes)
 
 routes.use('/favoritos', favoritosRoutes)
+
+routes.use('/carrinho', carrinhoRoutes)
+
 module.exports = routes
 
